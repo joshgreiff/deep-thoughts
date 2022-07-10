@@ -4,6 +4,9 @@ import { useQuery } from '@apollo/client'
 import { QUERYTHOUGHT } from '../utils/queries'
 
 import ReactionList from '../components/ReactionList'
+import ReactionForm from '../components/ReactionForm';
+
+import Auth from '../utils/auth';
 
 const SingleThought = props => {
   const { id: thoughtId } = useParams()
@@ -33,6 +36,8 @@ const SingleThought = props => {
       </div>
 
       {thought.reactionCount > 0 && <ReactionList reactions={thought.reactions} />}
+
+      {Auth.loggedIn() && <ReactionForm thought={thought._id} />}
     </div>
   );
 };
